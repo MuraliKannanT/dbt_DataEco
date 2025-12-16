@@ -1,0 +1,16 @@
+
+{% snapshot scd_orders %}
+
+{{
+    config(
+      target_schema='Business',
+      unique_key='order_id',
+      strategy='timestamp',
+      updated_at='order_date::timestamp_ntz',
+    )
+}}
+
+
+select * from {{ ref('int_orders') }}
+
+{% endsnapshot %}
